@@ -1,0 +1,150 @@
+const defaultImage = 'https://files.catbox.moe/k9dlno.jpg'
+
+const names = {
+  antilink: 'منع الروابط',
+  welcome: 'الترحيب',
+  antiarabe: 'منع العرب',
+  antispam: 'منع السبام'
+}
+
+const aliases = {
+  'الترحيب': 'welcome',
+  'ايقاف الترحيب': 'welcome',
+  'منع الروابط': 'antilink',
+  'ايقاف منع الروابط': 'antilink',
+  'منع العرب': 'antiarabe',
+  'ايقاف منع العرب': 'antiarabe',
+  'منع السبام': 'antispam',
+  'ايقاف منع السبام': 'antispam'
+}
+
+const handler = async (m, { conn, command, args, isAdmin, isOwner }) => {
+  if (!m.isGroup) return m.reply('🔒 هذا الأمر مخصص للجروبات فقط.')
+
+  if (!global.db.data.chats[m.chat]) global.db.data.chats[m.chat] = {}
+  const chat = global.db.data.chats[m.chat]
+
+  const type = aliases[command]
+  if (!type) {
+    return m.reply(`🌟 استخدم:\n*الترحيب* / *ايقاف الترحيب*\n*منع الروابط* / *ايقاف منع الروابط*\n*منع العرب* / *ايقاف منع العرب*\n*منع السبام* / *ايقاف منع السبام*`)
+  }
+
+  if (!(isAdmin || isOwner)) return m.reply('❌ هذا الأمر للمشرفين فقط.')
+
+  const enable = !command.startsWith('ايقاف')
+  chat[type] = enable
+  return m.reply(`✅ تم ${enable ? 'تشغيل' : 'إيقاف'} ${names[type]} بنجاح.`)
+}
+
+handler.before = async (m, { conn, isAdmin, isBotAdmin }) => {
+  if (!m.isGroup) return
+  if (!global.db.data.chats[m.chat]) global.db.data.chats[m.chat] = {}
+  const chat = global.db.data.chats[m.chat]
+
+  // --- مكافحة السبام ---
+  if (chat.antispam && m.text && m.text.length > 5000) {
+    const delet = m.key.participant
+    const msgID = m.key.id
+    const userTag = `@${m.sender.split('@')[0]}`
+
+    const fakemek = {
+      key: { participant: '0@s.whatsapp.net', remoteJid: '0@s.whatsapp.net' },
+      message: {
+        groupInviteMessage: {
+          groupJid: '',
+          inviteCode: 'm',
+          groupName: 'P',
+          caption: '🚫 تم اكتشاف رسالة مزعجة',
+          jpegThumbnail: null
+        }
+      }
+    }
+
+    if (!isBotAdmin) {
+      await conn.sendMessage(m.chat, {
+        text: `⚠️ تم اكتشاف رسالة طويلة جداً من ${userTag}\nلكنني لست مشرفاً لذا لا أستطيع حذفها!`,
+        mentions: [m.sender]
+      }, { quoted: fakemek })
+      return false
+    }
+
+    try {
+      await conn.sendMessage(m.chat, {
+        text: ` يا ${userTag}، برا يا حب ممنوع رسائل طويلة 🙂💔.`,
+        mentions: [m.sender]
+      }, { quoted: m })
+
+      await conn.sendMessage(m.chat, {
+        delete: {
+          remoteJid: m.chat,
+          fromMe: false,
+          id: msgID,
+          participant: delet
+        }
+      })
+
+      await conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+    } catch {
+      await conn.sendMessage(m.chat, {
+        text: `> تعذر حذف الرسالة أو طرد ${userTag}.`,
+        mentions: [m.sender]
+      }, { quoted: m })
+    }
+    return true
+  }
+
+  // --- الترحيب والوداع ---
+  if (chat.welcome && [27, 28, 32].includes(m.messageStubType)) {
+    const groupMetadata = await conn.groupMetadata(m.chat)
+    const groupSize = groupMetadata.participants.length
+    const userId = m.messageStubParameters?.[0] || m.sender
+    const userMention = `@${userId.split('@')[0]}`
+    let profilePic
+
+    try {
+      profilePic = await conn.profilePictureUrl(userId, 'image')
+    } catch {
+      profilePic = defaultImage
+    }
+
+    if (m.messageStubType === 27) {
+      const txtWelcome = '*مـنــور/ه يـخــويـا/يامز الــبـار🥸*'
+      const bienvenida = `مـــنـــور في: ${groupMetadata.subject}\n${userMention} مـنــور/ه يـا\nعدد الأعضاء أصبح الآن *${groupSize}*\n\n> تابع قوانين البار لعدم المشاكل 🤡\n> 𓆩 𝑶𝒎𝒆𝒈𝒂 𓆪 | 𓆩𝑨𝒍𝒊𓆪`.trim()
+
+      await conn.sendMessage(m.chat, {
+        image: { url: profilePic },
+        caption: `${txtWelcome}\n\n${bienvenida}`,
+        contextInfo: { mentionedJid: [userId] }
+      })
+    }
+
+    if (m.messageStubType === 28 || m.messageStubType === 32) {
+      const txtBye = '*ابـن الـكـلـب خـࢪج😂*'
+      const despedida = `غـادࢪ كـلـب يـجـي مـحـتـࢪم🐤\n➪ ${userMention}، الـڪـلـب\nعـدد الـبـاࢪ حالياً: *${groupSize}*\n> 𓆩 𝑶𝒎𝒆𝒈𝒂 𓆪 | 𓆩𝑨𝒍𝒊𓆪`.trim()
+
+      await conn.sendMessage(m.chat, {
+        image: { url: profilePic },
+        caption: `${txtBye}\n\n${despedida}`,
+        contextInfo: { mentionedJid: [userId] }
+      })
+    }
+  }
+}
+
+handler.command = [
+  'الترحيب', 'ايقاف الترحيب',
+  'منع الروابط', 'ايقاف منع الروابط',
+  'منع العرب', 'ايقاف منع العرب',
+  'منع السبام', 'ايقاف منع السبام'
+]
+handler.group = true
+handler.register = true
+handler.tags = ['group']
+handler.help = [
+  'الترحيب', 'ايقاف الترحيب',
+  'منع الروابط', 'ايقاف منع الروابط',
+  'منع العرب', 'ايقاف منع العرب',
+  'منع السبام', 'ايقاف منع السبام'
+]
+
+export default handler

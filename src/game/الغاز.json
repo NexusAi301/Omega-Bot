@@ -1,0 +1,77 @@
+[
+  { "question": "من هو بطل انمي ناروتو؟", "response": "ناروتو" },
+  { "question": "ما اسم قرية ناروتو؟", "response": "كونوها" },
+  { "question": "من هو الهوكاجي الاول؟", "response": "هاشيراما" },
+  { "question": "من هو الهوكاجي الثاني؟", "response": "توبيراما" },
+  { "question": "من هو الهوكاجي الثالث؟", "response": "هيروزن" },
+  { "question": "من هو الهوكاجي الرابع؟", "response": "ميناتو" },
+  { "question": "من هو الهوكاجي الخامس؟", "response": "تسونادي" },
+  { "question": "من هو الهوكاجي السادس؟", "response": "كاكاشي" },
+  { "question": "من هو الهوكاجي السابع؟", "response": "ناروتو" },
+  { "question": "من هو اخو ساسكي؟", "response": "ايتاتشي" },
+
+  { "question": "من هو قائد قبعة القش؟", "response": "لوفي" },
+  { "question": "من هو نائب لوفي؟", "response": "زورو" },
+  { "question": "من هو طباخ الطاقم؟", "response": "سانجي" },
+  { "question": "من هي الملاحة؟", "response": "نامي" },
+  { "question": "من هو القناص؟", "response": "اوسوب" },
+  { "question": "من هو الطبيب؟", "response": "تشوبر" },
+  { "question": "من هو الهيكل العظمي؟", "response": "بروك" },
+  { "question": "من هو السيبورغ؟", "response": "فرانكي" },
+  { "question": "من هو ابن غوكو؟", "response": "غوهان" },
+  { "question": "من هو خصم غوكو؟", "response": "فيجيتا" },
+
+  { "question": "من هو بطل هنتر؟", "response": "غون" },
+  { "question": "من هو صديق غون؟", "response": "كيلوا" },
+  { "question": "من هو كورابيكا؟", "response": "صياد" },
+  { "question": "من هو هيسوكا؟", "response": "مقاتل" },
+
+  { "question": "من هو بطل هجوم العمالقة؟", "response": "ايرين" },
+  { "question": "من هي ميكاسا؟", "response": "مقاتلة" },
+  { "question": "من هو ارمين؟", "response": "صديق ايرين" },
+  { "question": "من هو ليفاي؟", "response": "جندي" },
+
+  { "question": "من هو بطل بليتش؟", "response": "ايتشيغو" },
+  { "question": "ما اسم سيف ايتشيغو؟", "response": "زانغيتسو" },
+
+  { "question": "من هو غوجو؟", "response": "ساتورو" },
+  { "question": "ما اسم تقنية غوجو؟", "response": "اللامحدود" },
+  { "question": "من هو سوكونا؟", "response": "لعنة" },
+  { "question": "من هو ايتادوري؟", "response": "بطل" },
+
+  { "question": "من هو تانجيرو؟", "response": "قاتل شياطين" },
+  { "question": "من هي نيزوكو؟", "response": "اخت تانجيرو" },
+  { "question": "من هو زينيتسو؟", "response": "صديق تانجيرو" },
+  { "question": "من هو اينوسكي؟", "response": "مقاتل" },
+
+  { "question": "ما اسم انمي بلاك كلوفر؟", "response": "بلاك كلوفر" },
+  { "question": "من هو بطل بلاك كلوفر؟", "response": "استا" },
+  { "question": "من هو يونو؟", "response": "صديق استا" },
+
+  { "question": "من هو لايت؟", "response": "ياغامي" },
+  { "question": "من هو المحقق؟", "response": "ال" },
+  { "question": "ما اسم الشينيغامي؟", "response": "ريوك" },
+
+  { "question": "ما اسم كوكب غوكو؟", "response": "فيجيتا" },
+  { "question": "من هو فريزا؟", "response": "شرير" },
+
+  { "question": "من هو ملك القراصنة؟", "response": "غولد روجر" },
+  { "question": "ما اسم بحر ون بيس؟", "response": "الجراند لاين" },
+
+  { "question": "ما اسم انمي العمالقة؟", "response": "هجوم العمالقة" },
+  { "question": "ما اسم انمي القناص؟", "response": "هنتر" },
+  { "question": "ما اسم انمي جوجو؟", "response": "جوجيتسو" },
+
+  { "question": "من هو اقوى ساحر؟", "response": "غوجو" },
+  { "question": "من هو اقوى لعنة؟", "response": "سوكونا" },
+
+  { "question": "من هو والد لوفي؟", "response": "دراغون" },
+  { "question": "من هو اخ لوفي؟", "response": "ايس" },
+
+  { "question": "ما اسم فاكهة لوفي؟", "response": "جومو جومو" },
+
+  { "question": "من هو زعيم اكاتسوكي؟", "response": "باين" },
+  { "question": "ما اسم منظمة اكاتسوكي؟", "response": "اكاتسوكي" }
+
+  
+]
