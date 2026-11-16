@@ -19,9 +19,9 @@ global.libreria = 'Baileys'
 global.baileys = 'V 6.7.16' 
 global.vs = '2.2.0'
 global.nameqr = '𝑸𝑹'
-global.namebot = '𝑵𝒆𝒙𝒐𝒓'
+global.namebot = '𓆩 𝑶𝒎𝒆𝒈𝒂 𓆪'
 global.namedev = '𓆩𝑨𝒍𝒊𓆪'
-global.tg = 'https://t.me/bot_Gojo'
+global.tg = 'https://t.me/bot_Omega'
 global.sessions = 'sessions'
 global.jadi = 'JadiBots' 
 global.yukiJadibts = true
@@ -31,12 +31,12 @@ global.author = '𓆩𝑨𝒍𝒊𓆪'
 global.moneda = 'Dolar'
 global.canalreg = '//'
 
-global.namecanal = '⌜ بـــ𝐆𝐎𝐉𝐎ـــوت 💀 ⌟  || 𝗚𝕠𝕛𝕠 𝔹𝕠𝕥 💀'
-global.canal = '120363423432465949@newsletter'
-global.idcanal = '120363423432465949@newsletter'
+global.namecanal = '𓆩 𝑶𝒎𝒆𝒈𝒂 𓆪'
+global.canal = ''
+global.idcanal = ''
 
 global.ch = {
-ch1: '120363423432465949@newsletter',
+ch1: '',
 }
 
 global.multiplier = 99 
