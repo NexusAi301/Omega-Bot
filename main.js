@@ -32,7 +32,7 @@ const {
   jidNormalizedUser,
 } = await import('@whiskeysockets/baileys')
 
-const BOT_NAME = '𝗡𝗲𝘅𝘂𝘀 𝗔𝗜'
+const BOT_NAME = '𓆩 𝑶𝒎𝒆𝒈𝒂 𓆪'
 
 // ───────────────────────── أدوات مساعدة ─────────────────────────
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -164,7 +164,7 @@ function buildSocketOptions(authState) {
       creds: authState.creds,
       keys: makeCacheableSignalKeyStore(authState.keys, logger),
     },
-    browser: Browsers.ubuntu('Chrome'),
+    browser: Browsers.ubuntu('Firefox'),
     markOnlineOnConnect: false,
     generateHighQualityLinkPreview: true,
     syncFullHistory: false,
@@ -225,6 +225,8 @@ global.conns = global.conns || []
 global.subBots = global.subBots || {}
 
 // ───────────────────────── تسجيل الدخول (رمز اقتران / QR) ─────────────────────────
+// ───────────────────────── تسجيل الدخول (رمز اقتران / QR) ─────────────────────────
+
 function isValidPhone(n) {
   return n.length >= 8 && n.length <= 15 && !n.startsWith('0')
 }
@@ -266,7 +268,6 @@ async function handleLogin() {
     return
   }
 
-  // نلتقط أول QR حتى لا يضيع أثناء انتظار اختيار المستخدم
   let latestQr = null
   const captureQr = ({ qr }) => { if (qr) latestQr = qr }
   c.ev.on('connection.update', captureQr)
@@ -282,22 +283,24 @@ async function handleLogin() {
     } else {
       method = String(
         await ask(
-          chalk.green(`
-███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
-████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝
-██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗
-██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║
-██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
-╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+          chalk.cyanBright(`
+  ██████╗ ███╗   ███╗███████╗ ██████╗  █████╗ 
+ ██╔═══██╗████╗ ████║██╔════╝██╔════╝ ██╔══██╗
+ ██║   ██║██╔████╔██║█████╗  ██║  ███╗███████║
+ ██║   ██║██║╚██╔╝██║██╔══╝  ██║   ██║██╔══██║
+ ╚██████╔╝██║ ╚═╝ ██║███████╗╚██████╔╝██║  ██║
+  ╚═════╝ ╚═╝     ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝
+`) + chalk.yellowBright(`
+  ╭──────────────────────────────────────────╮
+  │    👑 المطورين : 𓆩𝑴𝒐𝒂𝒛𓆪 & 𓆩𝑨𝒍𝒊𓆪    │
+  ╰──────────────────────────────────────────╯
 
-  المطورين: 𓆩𝑴𝒐𝒂𝒛𓆪 & 𓆩𝑨𝒍𝒊𓆪
+  ╭────────( ${BOT_NAME} )────────╮
+  │   🔐 كيف تحب تسجيل دخولك؟   │
+  ╰──────────────────────────────╯
 
-╭────────( ${BOT_NAME} )──────╮
-│ 🔐 كيف تحب تسجيل دخولك؟ │
-╰───────────────────────╯
-
-🍺 اكتب *qr* لمسح رمز الاستجابة السريعة.
-🍻 أو اكتب *code* لإدخال رمز مكوّن من 8 أرقام.
+  🍺 اكتب *qr*   لمسح رمز الاستجابة السريعة.
+  🍻 أو اكتب *code* لإدخال رمز مكوّن من 8 أرقام.
 
 > `)
         )
